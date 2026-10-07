@@ -1,9 +1,19 @@
-PUBLIQUE TODOS OS ARQUIVOS DESTA PASTA NA RAIZ DO REPOSITÓRIO.
+NORYBIT — PACOTE PARA https://norybit.runs-at.dev/
 
-index.html: site completo em um único HTML (logo, CSS, JavaScript e demos incorporados).
-enter.txt e offline.txt: ficam FORA do HTML para você alternar a disponibilidade. Use 1 para ativar o bloqueio/aviso e 0 para liberar.
-robots.txt e sitemap.xml: indexação.
-googlefcb60326a1f530da.html: verificação Google.
-favicon*, apple-touch-icon.png e site.webmanifest: ícones do site.
+Publique todos os arquivos desta pasta na RAIZ do repositório GitHub Pages.
 
-Não são necessários CSS, JavaScript, imagens da logo nem arquivos de demo separados.
+INDEXAÇÃO
+• CNAME configura o domínio personalizado: norybit.runs-at.dev
+• index.html usa canonical e metadados de compartilhamento no domínio novo.
+• robots.txt permite robôs e aponta para sitemap.xml.
+• sitemap.xml lista a página principal no domínio novo.
+• googlefcb60326a1f530da.html mantém a verificação já existente do Google.
+
+CONTROLES EXTERNOS
+• enter.txt e offline.txt permanecem fora do HTML.
+• Use 1 para ligar o respectivo aviso/bloqueio e 0 para desligar.
+
+ÍCONE
+• favicon.ico, favicons PNG, apple-touch-icon.png e site.webmanifest ficam separados pois navegadores precisam acessá-los por URL.
+
+O restante do site (logo, CSS, JavaScript e demonstrações) está dentro do index.html.

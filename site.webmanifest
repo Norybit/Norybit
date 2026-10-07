@@ -1,8 +1,9 @@
 {
   "name": "Norybit",
   "short_name": "Norybit",
-  "start_url": "/Norybit/",
+  "start_url": "/",
   "display": "standalone",
+  "scope": "/",
   "background_color": "#030a16",
   "theme_color": "#061224",
   "icons": [

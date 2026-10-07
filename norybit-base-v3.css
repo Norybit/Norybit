@@ -18,3 +18,9 @@
 .nav{height:116px!important}.logo-lockup{width:238px!important;height:152px!important;display:block!important}.footer-lockup{width:250px!important;height:160px!important;display:block!important}
 .capacity-notice,.availability-notice{top:118px!important}.hero-content{padding-top:238px!important}
 @media(max-width:480px){.nav{height:92px!important}.logo-lockup{width:152px!important;height:104px!important}.footer-lockup{width:172px!important;height:118px!important}.capacity-notice,.availability-notice{top:96px!important}.hero-content{padding-top:206px!important}}
+
+
+/* Correção final da logo: fundo removido por transparência real. */
+:root{--norybit-logo-original:url("norybit-logo-original.png?v=transparente-real")}
+.logo-lockup,.footer-lockup,.brand-logo-image{background-color:transparent!important}
+.brand-logo-image{background-image:var(--norybit-logo-original)!important;background-repeat:no-repeat!important;background-position:center!important;background-size:contain!important}

@@ -1,10 +1,9 @@
-NORYBIT — LOGO CORRIGIDA
+PUBLIQUE TODOS OS ARQUIVOS DESTA PASTA NA RAIZ DO REPOSITÓRIO.
 
-Esta versão usa a logo enviada pelo proprietário com:
-• fundo escuro removido (PNG transparente);
-• desenho original preservado, sem recriação;
-• margens vazias aparadas para a logo aparecer maior;
-• logo maior no cabeçalho e no rodapé.
+index.html: site completo em um único HTML (logo, CSS, JavaScript e demos incorporados).
+enter.txt e offline.txt: ficam FORA do HTML para você alternar a disponibilidade. Use 1 para ativar o bloqueio/aviso e 0 para liberar.
+robots.txt e sitemap.xml: indexação.
+googlefcb60326a1f530da.html: verificação Google.
+favicon*, apple-touch-icon.png e site.webmanifest: ícones do site.
 
-Para publicar: extraia este ZIP e envie todo o conteúdo extraído ao repositório do GitHub Pages.
-Não envie o arquivo ZIP para dentro do site.
+Não são necessários CSS, JavaScript, imagens da logo nem arquivos de demo separados.

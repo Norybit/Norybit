@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://norybit.github.io/Norybit/sitemap-norybit.txt
+Sitemap: https://norybit.github.io/Norybit/sitemap.xml

@@ -1,0 +1,33 @@
+name: Aplicar visual Norybit
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/norybit-visual-upgrade.yml
+permissions:
+  contents: write
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Aplicar efeitos
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          if 'noryTouchCore' in s: raise SystemExit('Visual já aplicado')
+          css='''<style>body{background:#020713!important;overflow-x:hidden}body:before{content:'';position:fixed;inset:0;z-index:-3;pointer-events:none;background:radial-gradient(circle at 10% 15%,rgba(22,104,255,.18),transparent 28%),radial-gradient(circle at 89% 19%,rgba(0,200,255,.12),transparent 26%),radial-gradient(circle at 52% 94%,rgba(91,59,248,.13),transparent 32%),#020713}body:after{content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.23;background-image:linear-gradient(rgba(92,172,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(92,172,255,.14) 1px,transparent 1px);background-size:54px 54px;mask-image:linear-gradient(to bottom,#000,transparent 74%)}.hero{isolation:isolate;overflow:hidden;background:radial-gradient(ellipse 73% 80% at 81% 7%,rgba(23,93,243,.22),transparent 58%),radial-gradient(ellipse 65% 67% at 8% 100%,rgba(0,174,255,.14),transparent 62%),linear-gradient(122deg,#040918 0%,#071a38 48%,#020714 100%)!important}.hero:before{content:'';position:absolute;z-index:-1;inset:-30%;pointer-events:none;background:conic-gradient(from 120deg at 50% 50%,transparent 0deg,rgba(27,164,255,.12) 36deg,transparent 76deg,rgba(96,56,255,.12) 116deg,transparent 170deg);filter:blur(20px);animation:noryOrbit 18s linear infinite}@keyframes noryOrbit{to{transform:rotate(360deg)}}.ambient-orb{position:absolute;z-index:-1;border-radius:50%;pointer-events:none;mix-blend-mode:screen}.ambient-orb.one{width:14rem;height:14rem;right:-3rem;top:11rem;background:radial-gradient(circle,rgba(38,164,255,.38),transparent 68%);animation:noryFloat 7s ease-in-out infinite}.ambient-orb.two{width:19rem;height:19rem;left:-8rem;bottom:-8rem;background:radial-gradient(circle,rgba(83,54,255,.3),transparent 70%);animation:noryFloat 10s ease-in-out -3s infinite}@keyframes noryFloat{50%{transform:translate3d(14px,-19px,0) scale(1.08)}}.nory-touch-core{position:absolute;right:clamp(18px,5vw,84px);bottom:28px;z-index:4;width:64px;height:64px;border:1px solid rgba(151,216,255,.75);border-radius:50%;color:#dff5ff;background:radial-gradient(circle at 38% 28%,#4cd1ff,#1268e6 48%,#071846 75%);box-shadow:0 0 0 8px rgba(53,160,255,.06),0 0 42px rgba(24,139,255,.62);cursor:pointer;touch-action:manipulation}.nory-touch-core:before{content:'';position:absolute;inset:-12px;border:1px solid rgba(104,199,255,.35);border-radius:50%;animation:noryPulse 2.3s ease-out infinite}@keyframes noryPulse{0%{transform:scale(.76);opacity:.86}100%{transform:scale(1.2);opacity:0}}.nory-ripple{position:fixed;z-index:50;width:18px;height:18px;border:1px solid rgba(159,231,255,.85);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%) scale(.2);animation:noryRipple .85s cubic-bezier(.12,.79,.25,1) forwards}@keyframes noryRipple{to{transform:translate(-50%,-50%) scale(8);opacity:0}}@media(max-width:640px){.nory-touch-core{width:54px;height:54px;bottom:20px;right:20px}}</style>'''
+          markup='<div class="ambient-orb one" aria-hidden="true"></div><div class="ambient-orb two" aria-hidden="true"></div><button class="nory-touch-core" id="noryTouchCore" type="button" aria-label="Ativar efeito visual Norybit">✦</button>'
+          js='''<script>(function(){const c=document.getElementById('noryTouchCore');function b(x,y){const r=document.createElement('i');r.className='nory-ripple';r.style.left=x+'px';r.style.top=y+'px';document.body.appendChild(r);r.addEventListener('animationend',()=>r.remove())}c&&c.addEventListener('click',()=>{const r=c.getBoundingClientRect();b(r.left+r.width/2,r.top+r.height/2)});document.addEventListener('pointerdown',e=>{if(e.target.closest('a,button,input,textarea,select,iframe'))return;b(e.clientX,e.clientY)},{passive:true})})();</script>'''
+          s=s.replace('</style>',css+'</style>',1).replace('<div class="grid-bg"></div>','<div class="grid-bg"></div>'+markup,1).replace('</body>',js+'</body>',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Salvar site atualizado
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add index.html
+          git diff --cached --quiet || git commit -m Aplicar fundo e efeitos Norybit
+          git push

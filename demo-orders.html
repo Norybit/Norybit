@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Demonstração fictícia de sistema de pedidos da Nexbit." />
+  <title>Nexbit | Pedido demonstrativo</title>
+  <style>
+    :root {
+      --bg: #05080f;
+      --panel: #0d1422;
+      --panel-2: #111d31;
+      --line: #24324a;
+      --text: #f4f8ff;
+      --muted: #a4b0c4;
+      --blue: #1687ff;
+      --blue-2: #0b58c7;
+      --blue-glow: rgba(22, 135, 255, .24);
+      --danger: #ff6073;
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; min-width: 320px; color: var(--text); background:
+        radial-gradient(circle at 72% -8%, rgba(19, 104, 220, .31), transparent 34rem),
+        radial-gradient(circle at 4% 40%, rgba(10, 64, 143, .18), transparent 26rem), var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    button { font: inherit; }
+    .wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+    header { padding: 28px 0 20px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); font-weight: 800; font-size: 1.18rem; letter-spacing: -.03em; text-decoration: none; }
+    .brand-mark { position: relative; display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid #348fff; border-radius: 12px; color: white; background: linear-gradient(135deg, #1687ff, #063477); box-shadow: 0 0 26px var(--blue-glow); overflow: hidden; }
+    .brand-mark::after { content: ""; position: absolute; width: 40px; height: 10px; background: rgba(255,255,255,.25); rotate: -45deg; top: -4px; right: -13px; }
+    .brand-mark span { font-size: .94rem; z-index: 1; }
+    .cart-pill { display: inline-flex; align-items: center; gap: 9px; border: 1px solid var(--line); padding: 9px 13px; color: #dce9fb; background: rgba(13, 20, 34, .7); border-radius: 99px; font-size: .88rem; }
+    .cart-dot { display: grid; place-items: center; min-width: 22px; height: 22px; padding: 0 5px; border-radius: 50px; background: var(--blue); font-size: .74rem; font-weight: 800; color: #fff; }
+    .notice { display: flex; align-items: flex-start; gap: 10px; border: 1px solid #1b5ba8; border-radius: 14px; padding: 12px 14px; margin: 4px 0 28px; background: linear-gradient(90deg, rgba(11, 88, 199, .24), rgba(11, 88, 199, .05)); color: #d9ebff; font-size: .88rem; line-height: 1.4; }
+    .notice svg { flex: 0 0 auto; margin-top: 1px; color: #72b8ff; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 34px; align-items: end; padding: 14px 0 38px; }
+    .eyebrow { margin: 0 0 12px; color: #71b8ff; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; font-size: .72rem; }
+    h1 { margin: 0; max-width: 690px; font-size: clamp(2.15rem, 5.2vw, 4.55rem); letter-spacing: -.065em; line-height: .99; }
+    h1 strong { color: #2590ff; font-weight: 850; }
+    .intro { max-width: 630px; color: var(--muted); line-height: 1.65; margin: 18px 0 0; }
+    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .stat { padding: 16px; background: rgba(13, 20, 34, .76); border: 1px solid var(--line); border-radius: 15px; }
+    .stat b { display: block; font-size: 1.1rem; }
+    .stat span { color: var(--muted); font-size: .77rem; }
+    main { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 25px; padding-bottom: 54px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-bottom: 17px; }
+    h2 { font-size: 1.18rem; margin: 0; letter-spacing: -.025em; }
+    .section-heading span { color: var(--muted); font-size: .84rem; }
+    .products { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .product { overflow: hidden; position: relative; min-height: 218px; padding: 19px; border: 1px solid var(--line); background: linear-gradient(145deg, rgba(17,29,49,.94), rgba(9,14,25,.94)); border-radius: var(--radius); display: flex; flex-direction: column; justify-content: space-between; transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
+    .product:hover { transform: translateY(-3px); border-color: #327bd4; box-shadow: 0 15px 30px rgba(0,0,0,.25); }
+    .product::after { content: ""; position: absolute; width: 150px; height: 150px; right: -62px; top: -65px; border-radius: 50%; background: var(--product-color, #1687ff); opacity: .09; filter: blur(2px); }
+    .product-top { position: relative; z-index: 1; display: flex; justify-content: space-between; gap: 12px; }
+    .product-icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px; background: color-mix(in srgb, var(--product-color, #1687ff) 20%, transparent); color: var(--product-color, #1687ff); font-size: 1.28rem; font-weight: 900; }
+    .badge { align-self: start; color: #9dcaff; background: rgba(22,135,255,.12); border: 1px solid rgba(47,144,255,.24); border-radius: 99px; padding: 5px 8px; font-size: .67rem; font-weight: 760; }
+    .product h3 { margin: 17px 0 5px; font-size: 1.02rem; letter-spacing: -.02em; }
+    .product p { margin: 0; color: var(--muted); font-size: .81rem; line-height: 1.45; }
+    .product-bottom { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 18px; }
+    .price { font-size: 1.05rem; letter-spacing: -.025em; font-weight: 800; }
+    .add { cursor: pointer; appearance: none; border: 0; color: #fff; background: var(--blue); border-radius: 11px; padding: 9px 11px; font-size: .79rem; font-weight: 750; transition: background .2s ease, transform .2s ease; }
+    .add:hover { background: #379cff; transform: scale(1.02); }
+    .add:active { transform: scale(.98); }
+    .cart { position: sticky; top: 16px; height: max-content; border: 1px solid #2c3a51; background: linear-gradient(160deg, rgba(17,29,49,.98), rgba(9,14,25,.98)); border-radius: var(--radius); overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,.2); }
+    .cart-header { display: flex; justify-content: space-between; align-items: center; padding: 19px 19px 14px; border-bottom: 1px solid var(--line); }
+    .cart-title { display: flex; align-items: center; gap: 10px; font-weight: 800; }
+    .cart-icon { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 10px; background: rgba(22,135,255,.16); color: #65b2ff; }
+    #cartCountLabel { color: var(--muted); font-size: .77rem; }
+    .cart-items { min-height: 174px; max-height: 348px; overflow: auto; padding: 6px 19px; }
+    .empty { display: grid; place-items: center; min-height: 168px; color: var(--muted); text-align: center; font-size: .85rem; line-height: 1.5; }
+    .empty span { display: block; color: #4b6383; font-size: 1.8rem; margin-bottom: 5px; }
+    .cart-item { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 10px; padding: 13px 0; border-bottom: 1px solid rgba(36,50,74,.78); }
+    .cart-item:last-child { border-bottom: 0; }
+    .item-name { display: block; font-size: .86rem; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .item-unit { display: block; color: var(--muted); margin-top: 3px; font-size: .72rem; }
+    .item-side { display: flex; align-items: center; gap: 8px; }
+    .quantity { display: flex; align-items: center; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
+    .quantity button { display: grid; place-items: center; border: 0; background: transparent; color: #bcd1eb; width: 25px; height: 26px; cursor: pointer; font-size: 1rem; }
+    .quantity button:hover { background: rgba(255,255,255,.06); color: #fff; }
+    .quantity span { min-width: 20px; text-align: center; font-size: .78rem; font-weight: 750; }
+    .remove { border: 0; color: #8294ad; background: transparent; cursor: pointer; font-size: 1rem; padding: 0 0 0 1px; }
+    .remove:hover { color: var(--danger); }
+    .summary { border-top: 1px solid var(--line); padding: 16px 19px 19px; }
+    .summary-line { display: flex; justify-content: space-between; gap: 14px; color: var(--muted); font-size: .83rem; }
+    .total { margin: 11px 0 17px; color: var(--text); font-size: 1.1rem; font-weight: 850; }
+    .total strong { font-size: 1.28rem; letter-spacing: -.035em; }
+    .checkout { width: 100%; border: 0; cursor: pointer; border-radius: 12px; padding: 13px 15px; color: #fff; background: linear-gradient(135deg, #1687ff, #0960d9); box-shadow: 0 8px 22px rgba(11,88,199,.25); font-weight: 800; transition: filter .2s ease, transform .2s ease; }
+    .checkout:hover:not(:disabled) { filter: brightness(1.1); transform: translateY(-1px); }
+    .checkout:disabled { cursor: not-allowed; opacity: .43; box-shadow: none; }
+    .checkout-note { display: block; color: #7691b2; text-align: center; font-size: .68rem; margin-top: 9px; }
+    footer { border-top: 1px solid rgba(36,50,74,.72); padding: 21px 0 28px; color: #70819a; font-size: .77rem; text-align: center; }
+    dialog { width: min(420px, calc(100% - 32px)); padding: 0; color: var(--text); border: 1px solid #2d67ac; border-radius: 20px; background: #101b2d; box-shadow: 0 24px 80px rgba(0,0,0,.65); }
+    dialog::backdrop { background: rgba(0, 4, 12, .73); backdrop-filter: blur(4px); }
+    .modal { padding: 28px; text-align: center; }
+    .modal-symbol { display: grid; place-items: center; width: 58px; height: 58px; margin: 0 auto 15px; border-radius: 50%; background: rgba(22,135,255,.16); color: #70b8ff; font-size: 1.65rem; }
+    .modal h2 { font-size: 1.35rem; }
+    .modal p { color: var(--muted); line-height: 1.55; font-size: .9rem; margin: 12px 0 22px; }
+    .modal button { border: 0; border-radius: 11px; padding: 11px 28px; cursor: pointer; color: #fff; background: var(--blue); font-weight: 800; }
+    @media (max-width: 850px) { .hero, main { grid-template-columns: 1fr; } .hero { padding-bottom: 30px; } .hero-stats { max-width: 360px; } .cart { position: static; order: -1; } .cart-items { max-height: 250px; } }
+    @media (max-width: 520px) { .wrap { width: min(100% - 24px, 1180px); } header { padding-top: 18px; } .cart-pill .cart-text { display: none; } .products { grid-template-columns: 1fr; } .hero-stats { max-width: none; } .product { min-height: 198px; } }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="topbar">
+      <a class="brand" href="#inicio" aria-label="Nexbit Demo, início"><span class="brand-mark"><span>N</span></span> Nexbit <span style="font-weight:500;color:#7590b2">Demo</span></a>
+      <div class="cart-pill" aria-label="Itens no pedido"><span class="cart-text">Seu pedido</span><span class="cart-dot" id="headerCount">0</span></div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <aside class="notice" role="note">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      <strong>DEMONSTRAÇÃO — Este sistema é fictício e não realiza pedidos reais.</strong>
+    </aside>
+  </div>
+
+  <section class="wrap hero" id="inicio">
+    <div>
+      <p class="eyebrow">Projeto 1 · Sistema de pedidos</p>
+      <h1>Peça no seu ritmo.<br><strong>Sem pedidos de verdade.</strong></h1>
+      <p class="intro">Uma vitrine fictícia para apresentar uma experiência de pedido rápida, clara e totalmente local no navegador.</p>
+    </div>
+    <div class="hero-stats" aria-label="Características da demonstração">
+      <div class="stat"><b>100% local</b><span>Sem servidor ou banco</span></div>
+      <div class="stat"><b>0 dados</b><span>Nada é coletado</span></div>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <section aria-labelledby="menuTitle">
+      <div class="section-heading"><h2 id="menuTitle">Produtos em destaque</h2><span>Todos os valores são fictícios</span></div>
+      <div class="products" id="productList"></div>
+    </section>
+
+    <aside class="cart" aria-labelledby="cartTitle">
+      <div class="cart-header">
+        <div class="cart-title"><span class="cart-icon">⌑</span><span id="cartTitle">Seu pedido</span></div>
+        <span id="cartCountLabel">0 itens</span>
+      </div>
+      <div class="cart-items" id="cartItems" aria-live="polite"></div>
+      <div class="summary">
+        <div class="summary-line"><span>Subtotal</span><span id="subtotal">R$ 0,00</span></div>
+        <div class="summary-line total"><span>Total</span><strong id="total">R$ 0,00</strong></div>
+        <button class="checkout" id="checkoutBtn" disabled>Finalizar pedido</button>
+        <small class="checkout-note">Apenas demonstração — nenhuma compra será feita.</small>
+      </div>
+    </aside>
+  </main>
+
+  <footer><div class="wrap">Nexbit Demo · Projeto fictício para demonstração · Sem coleta de dados</div></footer>
+
+  <dialog id="demoModal" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-symbol">✓</div>
+      <h2 id="modalTitle">Demonstração concluída</h2>
+      <p>Este é um sistema fictício. Nenhum pedido foi enviado, nenhum pagamento foi processado e nenhum dado foi salvo.</p>
+      <button id="closeModal">Entendi</button>
+    </div>
+  </dialog>
+
+  <script>
+    const products = [
+      { id: 'pulse', name: 'Nex Pulse', description: 'Bebida energética fictícia, sabor cítrico.', price: 12.90, icon: '✦', color: '#56b1ff', badge: 'Mais pedido' },
+      { id: 'nova', name: 'Combo Nova', description: 'Lanche artesanal fictício com acompanhamento.', price: 29.90, icon: '◒', color: '#7797ff', badge: 'Destaque' },
+      { id: 'orbit', name: 'Orbit Bowl', description: 'Bowl fictício com ingredientes selecionados.', price: 24.50, icon: '◌', color: '#2cd7c4', badge: 'Novo' },
+      { id: 'pixel', name: 'Pixel Cookie', description: 'Cookie de chocolate fictício para adoçar a demo.', price: 9.90, icon: '▦', color: '#a58aff', badge: 'Edição demo' }
+    ];
+    const cart = {};
+    const money = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+    const productList = document.getElementById('productList');
+    const cartItems = document.getElementById('cartItems');
+    const total = document.getElementById('total');
+    const subtotal = document.getElementById('subtotal');
+    const headerCount = document.getElementById('headerCount');
+    const cartCountLabel = document.getElementById('cartCountLabel');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    const demoModal = document.getElementById('demoModal');
+
+    function renderProducts() {
+      productList.innerHTML = products.map(p => `
+        <article class="product" style="--product-color:${p.color}">
+          <div><div class="product-top"><span class="product-icon">${p.icon}</span><span class="badge">${p.badge}</span></div><h3>${p.name}</h3><p>${p.description}</p></div>
+          <div class="product-bottom"><span class="price">${money.format(p.price)}</span><button class="add" data-add="${p.id}">Adicionar ao pedido</button></div>
+        </article>`).join('');
+    }
+
+    function changeQuantity(id, delta) {
+      const next = (cart[id] || 0) + delta;
+      if (next <= 0) delete cart[id]; else cart[id] = next;
+      renderCart();
+    }
+
+    function renderCart() {
+      const selected = products.filter(p => cart[p.id]);
+      const count = selected.reduce((sum, p) => sum + cart[p.id], 0);
+      const orderTotal = selected.reduce((sum, p) => sum + p.price * cart[p.id], 0);
+      headerCount.textContent = count;
+      cartCountLabel.textContent = `${count} ${count === 1 ? 'item' : 'itens'}`;
+      subtotal.textContent = money.format(orderTotal);
+      total.textContent = money.format(orderTotal);
+      checkoutBtn.disabled = count === 0;
+
+      cartItems.innerHTML = selected.length ? selected.map(p => `
+        <div class="cart-item"><div><span class="item-name">${p.name}</span><span class="item-unit">${money.format(p.price)} cada</span></div>
+        <div class="item-side"><div class="quantity"><button aria-label="Diminuir ${p.name}" data-change="${p.id}" data-delta="-1">−</button><span>${cart[p.id]}</span><button aria-label="Aumentar ${p.name}" data-change="${p.id}" data-delta="1">+</button></div><button class="remove" aria-label="Remover ${p.name}" data-remove="${p.id}">×</button></div></div>`).join('') : '<div class="empty"><div><span>⌑</span>Seu carrinho está vazio.<br>Adicione um produto fictício.</div></div>';
+    }
+
+    document.addEventListener('click', event => {
+      const add = event.target.closest('[data-add]');
+      const change = event.target.closest('[data-change]');
+      const remove = event.target.closest('[data-remove]');
+      if (add) changeQuantity(add.dataset.add, 1);
+      if (change) changeQuantity(change.dataset.change, Number(change.dataset.delta));
+      if (remove) { delete cart[remove.dataset.remove]; renderCart(); }
+    });
+    checkoutBtn.addEventListener('click', () => demoModal.showModal());
+    document.getElementById('closeModal').addEventListener('click', () => demoModal.close());
+    demoModal.addEventListener('click', event => { if (event.target === demoModal) demoModal.close(); });
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>

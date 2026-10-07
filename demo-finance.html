@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Demo fictícia de controle financeiro pessoal da Nexbit.">
-  <title>Nexbit Fluxo — Controle financeiro demonstrativo</title>
+  <meta name="description" content="Demo fictícia de controle financeiro pessoal da Aurora.">
+  <title>Aurora Fluxo — Controle financeiro demonstrativo</title>
   <style>
     :root{--yellow:#ffcc26;--yellow-deep:#eeb600;--ink:#20221d;--muted:#77786f;--paper:#fffefa;--wash:#fff9e6;--line:#eee9d9;--green:#218864;--red:#d9534f;--blue:#3b7ddd;--radius:22px;--shadow:0 14px 42px rgba(83,64,6,.09)}
     *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;min-width:320px;background:linear-gradient(180deg,#fff9e7 0 338px,#fffefa 338px);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -21,7 +21,7 @@
   </style>
 </head>
 <body>
-  <header class="shell top"><div class="brand"><span class="logo">N</span><span>Nexbit <small>Fluxo pessoal</small></span></div><span class="period">Outubro de 2026</span></header>
+  <header class="shell top"><div class="brand"><span class="logo">N</span><span>Aurora <small>Fluxo pessoal</small></span></div><span class="period">Outubro de 2026</span></header>
   <div class="shell"><aside class="warning" role="note"><b>!</b><strong>DEMONSTRAÇÃO — Dados totalmente fictícios.</strong> Nenhuma informação real é coletada, salva ou enviada.</aside></div>
   <section class="shell hero"><div><p class="kicker">Projeto 2 · Finanças pessoais</p><h1>Seu dinheiro,<br>com mais clareza.</h1><p>Uma visão leve e organizada para demonstrar como um aplicativo de controle financeiro pode funcionar.</p></div><button class="new-btn" id="openModal">＋ Adicionar transação</button></section>
 
@@ -36,7 +36,7 @@
       <article class="card transactions"><div class="card-head"><h2>Transações recentes</h2><span id="transactionCount">5 lançamentos</span></div><div class="transaction-list" id="transactionList"></div></article>
     </section>
   </main>
-  <footer class="shell privacy"><b>Nexbit Fluxo</b> · Projeto fictício, local e sem login · Nenhum dado é armazenado</footer>
+  <footer class="shell privacy"><b>Aurora Fluxo</b> · Projeto fictício, local e sem login · Nenhum dado é armazenado</footer>
 
   <dialog id="transactionModal" aria-labelledby="modalTitle"><div class="modal"><div class="modal-top"><div><h2 id="modalTitle">Nova transação fictícia</h2><p>Ela aparece apenas nesta tela e desaparece ao recarregar a página.</p></div><button class="close" id="closeModal" aria-label="Fechar">×</button></div><form class="form" id="transactionForm"><div class="type-toggle"><button type="button" class="active" data-type="expense">Saída</button><button type="button" data-type="income">Entrada</button></div><div class="field"><label for="description">Descrição</label><input id="description" maxlength="28" placeholder="Ex.: Cinema fictício" required></div><div class="form-row"><div class="field"><label for="amount">Valor</label><input id="amount" type="number" min="0.01" step="0.01" placeholder="0,00" required></div><div class="field"><label for="category">Categoria</label><select id="category"><option>Outros</option><option>Alimentação</option><option>Transporte</option><option>Lazer</option><option>Moradia</option><option>Trabalho</option></select></div></div><button class="save" type="submit">Adicionar à demonstração</button><p class="form-note">Dados totalmente fictícios — nada será salvo.</p></form></div></dialog>
 

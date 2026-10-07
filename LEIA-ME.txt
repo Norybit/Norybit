@@ -1,13 +1,10 @@
-# Norybit — pacote corrigido
+NORYBIT — LOGO CORRIGIDA
 
-Este pacote está pronto para GitHub Pages.
+Esta versão usa a logo enviada pelo proprietário com:
+• fundo escuro removido (PNG transparente);
+• desenho original preservado, sem recriação;
+• margens vazias aparadas para a logo aparecer maior;
+• logo maior no cabeçalho e no rodapé.
 
-## O que foi corrigido
-- `norybit-logo-original.png` é a imagem exata enviada pelo proprietário.
-- A logo é referenciada diretamente pelo CSS, sem corte, sem desenho manual e sem SVG recriado.
-- O símbolo `N` e toda a arte original permanecem intactos.
-- Os avisos de disponibilidade continuam acima do letreiro.
-
-## Publicação
-Substitua os arquivos do seu repositório por todo o conteúdo desta pasta/ZIP e publique pelo GitHub Pages.
-Não envie o arquivo `.zip` dentro do site: extraia e envie os arquivos que estão nele.
+Para publicar: extraia este ZIP e envie todo o conteúdo extraído ao repositório do GitHub Pages.
+Não envie o arquivo ZIP para dentro do site.

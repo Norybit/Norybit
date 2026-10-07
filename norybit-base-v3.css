@@ -9,3 +9,12 @@
 /* Mantém a arte quadrada original inteira, incluindo o símbolo N. */
 .logo-lockup{width:82px!important;height:82px!important}.footer-lockup{width:94px!important;height:94px!important}
 @media(max-width:480px){.logo-lockup{width:70px!important;height:70px!important}.footer-lockup{width:78px!important;height:78px!important}}
+
+
+/* Logo original: fundo removido e arte ampliada, sem redesenho. */
+:root{--norybit-logo-original:url("norybit-logo-original.png?v=sem-fundo-maior")}
+.brand-logo-image{background-image:var(--norybit-logo-original)!important;background-repeat:no-repeat!important;background-position:center!important;background-size:contain!important}
+/* A imagem já foi aparada apenas nas margens vazias; a marca inteira continua visível. */
+.nav{height:116px!important}.logo-lockup{width:238px!important;height:152px!important;display:block!important}.footer-lockup{width:250px!important;height:160px!important;display:block!important}
+.capacity-notice,.availability-notice{top:118px!important}.hero-content{padding-top:238px!important}
+@media(max-width:480px){.nav{height:92px!important}.logo-lockup{width:152px!important;height:104px!important}.footer-lockup{width:172px!important;height:118px!important}.capacity-notice,.availability-notice{top:96px!important}.hero-content{padding-top:206px!important}}
